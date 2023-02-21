@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PlaceholderImg from '../assets/placeholder-bg.jpg'
 
 const MapContainer = () => {
   const [location, setLocation] = useState(null);
@@ -29,7 +30,7 @@ const MapContainer = () => {
             src={`https://maps.google.com/maps?q=${location.latitude},${location.longitude}&output=embed`}
           />
         ) : (
-          <img src="../../public/images/placeholder-bg.jpg" alt="Placeholder" />
+          <img src={PlaceholderImg} height="300" alt="Placeholder" />
         )}
       </div>
     </div>
