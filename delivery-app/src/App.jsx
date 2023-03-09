@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import AddOrder from "./components/AddOrder";
 import FilterButton from "./components/FilterButton";
 import MapContainer from "./components/MapContainer";
 import Navbar from "./components/Navbar";
@@ -25,35 +26,48 @@ function App() {
   ));
   const [orders, setOrders] = useState(() => {
     const initialValue = localStorage.getItem("orders");
-
-    //Will use the orders dummy data if all objects removed
     return initialValue !== null ? JSON.parse(initialValue) : ordersData;
   });
 
-  const allOrderElements = orders.filter(FILTER_MAP[filter]).map((order) => <Order {...order} key={order.orderNumber} onDelivered={toggleDelivered}/>);
-
+  const allOrderElements = orders
+    .filter(FILTER_MAP[filter])
+    .map((order) => (
+      <Order
+        {...order}
+        key={order.orderNumber}
+        onDelivered={toggleDelivered}
+        handleDelete={deleteOrder}
+      />
+    ));
 
   useEffect(() => {
     localStorage.setItem("orders", JSON.stringify(orders));
   }, [orders]);
 
-  function toggleDelivered(orderNumber) {
-
-    setOrders(prevOrders => {
-      return prevOrders.map(order => {
-        if (orderNumber === order.orderNumber ) {
-          return { ...order, delivered: !order.delivered }
+  function toggleDelivered(orderNumber, deliverInfo) {
+    console.log(deliverInfo);
+    setOrders((prevOrders) => {
+      return prevOrders.map((order) => {
+        if (orderNumber === order.orderNumber) {
+          return { ...order, delivered: !order.delivered, ...deliverInfo };
         }
-          return order;
-      })
-    })
+        return order;
+      });
+    });
   }
+
+  function addOrder(newOrder) {
+    setOrders((prevOrders) => [...prevOrders, newOrder]);
+  }
+
+  function deleteOrder(id) {}
 
   return (
     <div className="w-full h-screen">
       <Navbar />
       <MapContainer />
       <div className="w-full">
+        <AddOrder handleAdd={addOrder} />
         <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">
           <div className="max-w-[350px] mx-auto flex justify-center flex-1 basis-3/6 space-x-2">
             {filterList}
