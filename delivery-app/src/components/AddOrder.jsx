@@ -39,17 +39,18 @@ export default function AddOrder({handleAdd, handleDelete}) {
 
   return (
     <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">
-      <div className="max-w-[350px] mx-auto flex justify-center flex-1 basis-3/6 space-x-2">
+      <div className="max-w-[350px] mx-auto text">
+        <h2 className=" self-center font-bold text-center">Add Order</h2>
         <form
-          className="w-full flex flex-col flex-nowrap justify-center items-start mx-auto bg-slate-200 shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 "
+          className="w-full flex flex-col flex-nowrap items-stretch bg-slate-200 shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 "
           onSubmit={handleSubmit}
         >
-        <h2 className=" self-center font-bold">Add Order</h2>
           <label>
             Order Number:
             <input
               type="text"
               name="orderNumber"
+              className="w-full"
               value={order.orderNumber}
               onChange={handleInputChange}
             />
@@ -59,16 +60,8 @@ export default function AddOrder({handleAdd, handleDelete}) {
             <input
               type="text"
               name="customerName"
+              className="w-full"
               value={order.customerName}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Delivered:
-            <input
-              type="checkbox"
-              name="delivered"
-              checked={order.delivered}
               onChange={handleInputChange}
             />
           </label>
@@ -77,6 +70,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
             <input
               type="text"
               name="address"
+              className="w-full"
               value={order.address}
               onChange={handleInputChange}
             />
@@ -87,6 +81,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="number"
               step="any"
               name="latitude"
+              className="w-full"
               value={order.location.latitude}
               onChange={handleLocationChange}
             />
@@ -97,8 +92,18 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="number"
               step="any"
               name="longitude"
+              className="w-full"
               value={order.location.longitude}
               onChange={handleLocationChange}
+            />
+          </label>
+          <label>
+            Delivered:
+            <input
+              type="checkbox"
+              name="delivered"
+              checked={order.delivered}
+              onChange={handleInputChange}
             />
           </label>
           <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center my-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Order</button>
