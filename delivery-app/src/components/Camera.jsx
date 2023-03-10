@@ -80,18 +80,24 @@ const Camera = forwardRef(({ onCapture, disabled }, ref) => {
       {showPreview ? (
         <div>
           <img src={capturedImage} alt="Captured" />
-          <div className="flex gap-4">
+          <div className="flex gap-4 pt-2">
+          <div className="flex flex-col justify-center items-center">
             <FaCameraRetro
               onClick={retakePicture}
               className="cursor-pointer"
               size={34}
             />
+            <span>Retake</span>
+          </div>
+          <div className="flex flex-col justify-center items-center">
             <BsFillCheckCircleFill
               onClick={savePicture}
               className="cursor-pointer"
               size={34}
               style={{ color: "rgb(60, 179, 113)" }}
             />
+            <span>Accept</span>
+          </div>
           </div>
         </div>
       ) : (
@@ -101,7 +107,7 @@ const Camera = forwardRef(({ onCapture, disabled }, ref) => {
             autoPlay
             className={isCameraOpen ? "block" : "hidden"}
           ></video>
-          <div className={disabled ? "hidden" : "flex"}>
+          <div className={disabled ? "hidden" : "flex pt-2"}>
             <button
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -110,9 +116,9 @@ const Camera = forwardRef(({ onCapture, disabled }, ref) => {
               {isCameraOpen ? "Take Picture" : "Confirm Delivery"}
             </button>
             <MdCancel
-              size={34}
+              size={40}
               onClick={stopCamera}
-              className=" cursor-pointer"
+              className=" cursor-pointer fill-red-500 hover:fill-red-600"
             />
           </div>
         </div>
