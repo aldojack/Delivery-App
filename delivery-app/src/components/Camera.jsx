@@ -118,7 +118,7 @@ const Camera = forwardRef(({ onCapture, disabled }, ref) => {
             <MdCancel
               size={40}
               onClick={stopCamera}
-              className=" cursor-pointer fill-red-500 hover:fill-red-600"
+              className={isCameraOpen ? " cursor-pointer fill-red-500 hover:fill-red-600" : 'hidden'}
             />
           </div>
         </div>
