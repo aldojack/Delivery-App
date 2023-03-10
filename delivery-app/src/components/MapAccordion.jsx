@@ -3,22 +3,13 @@ import {useEffect, useState} from "react";
 export default function MapAccordion({location: {longitude, latitude}}) {
     const [isOpen, setIsOpen] = useState(false)
 
-    console.log(longitude)
-    console.log(latitude)
-
-    useEffect(() => {
-      console.log("use effect")
-      console.log(longitude)
-      console.log(latitude)
-    },[])
-
   return (
     <div className="bg-white rounded-lg shadow-md">
       <button
         className="flex justify-between items-center w-full p-4"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-lg font-medium">View Map</span>
+        <span className="text-lg font-medium">View Customer Map</span>
         <svg
           className={`${
             isOpen ? "transform rotate-180" : ""
