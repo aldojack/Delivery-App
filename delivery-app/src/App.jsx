@@ -16,6 +16,7 @@ const FILTER_MAP = {
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
+  const [isLocationAllowed, setIsLocationAllowed] = useState(false);
   const [filter, setFilter] = useState("All");
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
@@ -76,10 +77,16 @@ function App() {
     // Update the state with the updated orders array
     setOrders(updatedOrders);
   }
+
+  function allowLocation(response){
+    setIsLocationAllowed(true)
+  }
   
 
   return (
     <div className="w-full h-screen">
+    {isLocationAllowed &&  (
+      <>
       <Navbar />
       <MapContainer />
       <div className="w-full">
@@ -92,6 +99,10 @@ function App() {
           
         </div>
       </div>
+      </>
+    )}
+    {!isLocationAllowed && <LandingPage onAccept={allowLocation}/>}
+
     </div>
   );
 }
