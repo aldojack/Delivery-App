@@ -16,9 +16,24 @@ const MapContainer = () => {
     );
   }, []);
 
+  // useEffect(() => {
+  //   const watchId = navigator.geolocation.watchPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setLocation({ latitude, longitude });
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  //   return () => {
+  //     navigator.geolocation.clearWatch(watchId);
+  //   };
+  // }, []);
+
   return (
     <div className="w-full mt-28">
-      <div className="max-w-[1240px] w-full mx-auto">
+      <div>
         {location ? (
           <iframe
             width="100%"

@@ -107,10 +107,10 @@ const Camera = forwardRef(({ onCapture, disabled }, ref) => {
             autoPlay
             className={isCameraOpen ? "block" : "hidden"}
           ></video>
-          <div className={disabled ? "hidden" : "flex pt-2"}>
+          <div className={disabled ? "hidden" : "flex pt-2 justify-center"}>
             <button
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-[#FF6161] hover:bg-[#f63a3a] focus:outline-none focus:ring-4 focus:ring-orange-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-[#FF6161] dark:hover:bg-[#f63a3a]"
               onClick={isCameraOpen ? takePicture : startCamera}
             >
               {isCameraOpen ? "Take Picture" : "Confirm Delivery"}

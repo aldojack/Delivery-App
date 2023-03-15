@@ -5,6 +5,7 @@ import MapContainer from "./components/MapContainer";
 import Navbar from "./components/Navbar";
 import Order from "./components/Order";
 import ordersData from "./data/orders";
+import LandingPage from "./pages/LandingPage";
 
 const FILTER_MAP = {
   All: () => true,
@@ -45,7 +46,7 @@ function App() {
   }, [orders]);
 
   function toggleDelivered(orderNumber, deliverInfo) {
-    console.log(deliverInfo);
+ 
     setOrders((prevOrders) => {
       return prevOrders.map((order) => {
         if (orderNumber === order.orderNumber) {
@@ -60,7 +61,22 @@ function App() {
     setOrders((prevOrders) => [...prevOrders, newOrder]);
   }
 
-  function deleteOrder(id) {}
+  function deleteOrder(orderNum) {
+    // Create a copy of the orders array
+    const updatedOrders = [...orders];
+  
+    // Find the index of the object with the given id in the array
+    const indexToDelete = updatedOrders.findIndex(order => order.orderNumber === orderNum);
+  
+    // If the object was found, remove it from the array
+    if (indexToDelete !== -1) {
+      updatedOrders.splice(indexToDelete, 1);
+    }
+  
+    // Update the state with the updated orders array
+    setOrders(updatedOrders);
+  }
+  
 
   return (
     <div className="w-full h-screen">
@@ -68,11 +84,12 @@ function App() {
       <MapContainer />
       <div className="w-full">
         <AddOrder handleAdd={addOrder} />
-        <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">
-          <div className="max-w-[350px] mx-auto flex justify-center flex-1 basis-3/6 space-x-2">
+        <div className="max-w-[1240px] md:grid md:grid-cols-3 md:gap-2 w-full h-full mx-auto p-4 space-y-4">
+          <div className="max-w-[350px] mx-auto flex justify-center flex-1 basis-3/6 space-x-2 md:col-span-3">
             {filterList}
           </div>
           {allOrderElements}
+          
         </div>
       </div>
     </div>
