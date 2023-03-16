@@ -1,17 +1,22 @@
 import { useState, useRef, useEffect } from "react";
 import Camera from "./Camera";
 import { BsFillPersonFill } from "react-icons/bs";
+import { AiFillCar } from "react-icons/ai";
+import {TbClock} from "react-icons/tb"
+import {FaRegCheckSquare} from  "react-icons/fa"
 import MapAccordion from "./MapAccordion";
 
 export default function Order({
   address,
   customerName,
+  status,
   delivered,
   location,
   orderNumber,
   onDelivered,
   deliveryUrl,
-  handleDelete
+  handleDelete,
+  handleAccept,
 }) {
   const [pictureUrl, setPictureUrl] = useState(null);
   const [deliveredLocation, setDeliveredLocation] = useState("");
@@ -30,6 +35,7 @@ export default function Order({
   function confirmDelivery() {
     //Send back picture URL and new location
     let deliveredInfo = {
+      status: "Completed",
       deliveryUrl: pictureUrl,
       deliveryCoords: deliveredLocation,
     };
@@ -54,6 +60,7 @@ export default function Order({
 
   function removePhoto() {
     let deliveredInfo = {
+      status: "Awaiting Acceptance",
       deliveryUrl: null,
       deliveryCoords: deliveredLocation,
     };
@@ -61,12 +68,43 @@ export default function Order({
     setPictureUrl(null);
   }
 
-  function deleteOrder(){
-    handleDelete(orderNumber)
+  function deleteOrder() {
+    handleDelete(orderNumber);
+  }
+
+  function acceptOrder() {
+    handleAccept(orderNumber);
+  }
+
+  let actionButton;
+  let statusIcon;
+  if (status === "Awaiting Acceptance") {
+    actionButton = (
+      <button
+        type="button"
+        onClick={acceptOrder}
+        className="text-white bg-[#FF6161] hover:bg-[#f63a3a] focus:outline-none focus:ring-4 focus:ring-orange-600 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-[#FF6161] dark:hover:bg-[#f63a3a]"
+      >
+        Accept
+      </button>
+    );
+    statusIcon = <TbClock size={28}/>;
+  } else if (status === "Active") {
+    actionButton = (
+      <Camera ref={cameraRef} onCapture={handleCapture} disabled={delivered} />
+    );
+    statusIcon = <AiFillCar size={28}/>
+  }
+  else{
+    statusIcon = <FaRegCheckSquare size={28}/>
   }
 
   return (
     <div className="rounded-xl shadow-lg bg-slate-200 max-w-[500px] mx-auto p-4">
+      <div className="flex justify-center gap-2 md:justify-between">
+        {statusIcon}
+        <span className="font-bold">{status}</span>
+      </div>
       <div className="grid grid-cols-2 items-center justify-items-center gap-4">
         <BsFillPersonFill size={50} />
         <div>
@@ -82,14 +120,8 @@ export default function Order({
         </div>
         <div></div>
       </div>
-      <div className="grid justify-items-center">
-        <Camera
-          ref={cameraRef}
-          onCapture={handleCapture}
-          disabled={delivered}
-        />
-      </div>
-      {delivered && (
+      <div className="grid justify-items-center">{actionButton}</div>
+      {status === "Completed" && (
         <div>
           <div className="bg-white rounded-lg shadow-md">
             <button

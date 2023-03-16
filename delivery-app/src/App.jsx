@@ -9,15 +9,16 @@ import LandingPage from "./pages/LandingPage";
 
 const FILTER_MAP = {
   All: () => true,
-  Active: (order) => !order.delivered,
-  Completed: (order) => order.delivered,
+  AwaitingAcceptance: (order) => order.status === "Awaiting Acceptance",
+  Active: (order) => order.status === "Active",
+  Completed: (order) => order.status === "Completed",
 };
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
   const [isLocationAllowed, setIsLocationAllowed] = useState(false);
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("AwaitingAcceptance");
   const filterList = FILTER_NAMES.map((name) => (
     <FilterButton
       name={name}
@@ -37,8 +38,9 @@ function App() {
       <Order
         {...order}
         key={order.orderNumber}
-        onDelivered={toggleDelivered}
+        onDelivered={confirmDelivery}
         handleDelete={deleteOrder}
+        handleAccept={acceptOrder}
       />
     ));
 
@@ -78,8 +80,30 @@ function App() {
     setOrders(updatedOrders);
   }
 
-  function allowLocation(response){
+  function allowLocation(){
     setIsLocationAllowed(true)
+  }
+
+  function acceptOrder(orderNumber){
+    setOrders((prevOrders) => {
+      return prevOrders.map((order) => {
+        if (orderNumber === order.orderNumber) {
+          return { ...order, status: "Active"};
+        }
+        return order;
+      });
+    });
+  }
+
+  function confirmDelivery(orderNumber, deliverInfo){
+    setOrders((prevOrders) => {
+      return prevOrders.map((order) => {
+        if (orderNumber === order.orderNumber) {
+          return { ...order, ...deliverInfo };
+        }
+        return order;
+      });
+    });
   }
   
 

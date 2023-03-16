@@ -2,6 +2,7 @@ const orders = [
     {
       orderNumber: 1234,
       customerName: "John Doe",
+      status: "Awaiting Acceptance",
       delivered: false,
       address: "123 Main St, Anytown, USA",
       location: {
@@ -12,6 +13,7 @@ const orders = [
     {
       orderNumber: 5678,
       customerName: "Jane Smith",
+      status: "Active",
       delivered: false,
       address: "456 Maple Ave, Anytown, USA",
       location: {
@@ -22,6 +24,7 @@ const orders = [
     {
       orderNumber: 9012,
       customerName: "Bob Johnson",
+      status: "Awaiting Acceptance",
       delivered: false,
       address: "789 Oak St, Anytown, USA",
       location: {
