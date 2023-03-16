@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {TbCurrentLocation} from  'react-icons/tb'
 
 export default function AddOrder({handleAdd, handleDelete}) {
   const [isOpen, setIsOpen] = useState(false)
@@ -38,6 +39,26 @@ export default function AddOrder({handleAdd, handleDelete}) {
     // Do something with the order object
   }
 
+  function currentLocation(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setOrder((prevOrder) => ({
+          ...prevOrder,
+          location: {
+            ...prevOrder.location,
+            latitude: latitude,
+            longitude: longitude
+          },
+        }));
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   return (
     <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">
       <div className="max-w-[350px] mx-auto text">
@@ -75,6 +96,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="orderNumber"
               className="w-full"
+              required="true"
               value={order.orderNumber}
               onChange={handleInputChange}
             />
@@ -85,6 +107,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="customerName"
               className="w-full"
+              required="true"
               value={order.customerName}
               onChange={handleInputChange}
             />
@@ -95,6 +118,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="address"
               className="w-full"
+              required="true"
               value={order.address}
               onChange={handleInputChange}
             />
@@ -103,9 +127,10 @@ export default function AddOrder({handleAdd, handleDelete}) {
             Location Latitude:
             <input
               type="number"
-              step="any"
+              disabled="true"
               name="latitude"
               className="w-full"
+              required="true"
               value={order.location.latitude}
               onChange={handleLocationChange}
             />
@@ -114,22 +139,18 @@ export default function AddOrder({handleAdd, handleDelete}) {
             Location Longitude:
             <input
               type="number"
-              step="any"
+              disabled="true"
               name="longitude"
               className="w-full"
+              required="true"
               value={order.location.longitude}
               onChange={handleLocationChange}
             />
           </label>
-          {/* <label>
-            Delivered:
-            <input
-              type="checkbox"
-              name="delivered"
-              checked={order.delivered}
-              onChange={handleInputChange}
-            />
-          </label> */}
+          <label className=" inline-flex">
+            Get Current Location:
+          <button className="ml-2"><TbCurrentLocation onClick={currentLocation}/></button>
+          </label>
           <button type="submit" className="text-white bg-[#FF6161] hover:bg-[#880303] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center my-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Order</button>
         </form>
         </div>
