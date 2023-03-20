@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export default function MapAccordion({location: {longitude, latitude}}) {
+export default function MapAccordion({latitude, longitude, title="View Customer Map"}) {
     const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -9,7 +9,7 @@ export default function MapAccordion({location: {longitude, latitude}}) {
         className="flex justify-between items-center w-full p-4"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-lg font-medium">View Customer Map</span>
+        <span className="text-lg font-medium">{title}</span>
         <svg
           className={`${
             isOpen ? "transform rotate-180" : ""
