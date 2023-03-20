@@ -3,9 +3,11 @@ import {TbCurrentLocation} from  'react-icons/tb'
 
 export default function AddOrder({handleAdd, handleDelete}) {
   const [isOpen, setIsOpen] = useState(false)
+  const [error, setError] = useState(null);
   const [order, setOrder] = useState({
     orderNumber: "",
     customerName: "",
+    status: "Awaiting Acceptance",
     delivered: false,
     address: "",
     location: {
@@ -35,7 +37,17 @@ export default function AddOrder({handleAdd, handleDelete}) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    handleAdd(order)
+    if(!order.location.latitude || !order.location.longitude)
+    {
+      console.log(order.location.latitude)
+      console.log(location.longitude)
+      console.log("No location")
+      setError("No location")
+    }
+    else{
+      setError(null);
+      handleAdd(order)
+    }
     // Do something with the order object
   }
 
@@ -96,7 +108,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="orderNumber"
               className="w-full"
-              required="true"
+              required={true}
               value={order.orderNumber}
               onChange={handleInputChange}
             />
@@ -107,7 +119,7 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="customerName"
               className="w-full"
-              required="true"
+              required={true}
               value={order.customerName}
               onChange={handleInputChange}
             />
@@ -118,19 +130,28 @@ export default function AddOrder({handleAdd, handleDelete}) {
               type="text"
               name="address"
               className="w-full"
-              required="true"
+              required={true}
               value={order.address}
               onChange={handleInputChange}
             />
           </label>
+          <label className=" inline-flex">
+            Get Current Location:
+          <button className="ml-2"><TbCurrentLocation onClick={currentLocation}/></button>
+          </label>
+          {error && (
+            <div>
+              <p className="text-red-500 font-bold text-xs">Please click to generate current location</p>
+            </div>
+            )}
           <label>
             Location Latitude:
             <input
               type="number"
-              disabled="true"
+              disabled={true}
               name="latitude"
               className="w-full"
-              required="true"
+              required={true}
               value={order.location.latitude}
               onChange={handleLocationChange}
             />
@@ -139,18 +160,15 @@ export default function AddOrder({handleAdd, handleDelete}) {
             Location Longitude:
             <input
               type="number"
-              disabled="true"
+              disabled={true}
               name="longitude"
               className="w-full"
-              required="true"
+              required={true}
               value={order.location.longitude}
               onChange={handleLocationChange}
             />
           </label>
-          <label className=" inline-flex">
-            Get Current Location:
-          <button className="ml-2"><TbCurrentLocation onClick={currentLocation}/></button>
-          </label>
+
           <button type="submit" className="text-white bg-[#FF6161] hover:bg-[#880303] focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center my-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Order</button>
         </form>
         </div>
