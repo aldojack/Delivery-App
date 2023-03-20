@@ -15,6 +15,7 @@ export default function Order({
   orderNumber,
   onDelivered,
   deliveryUrl,
+  deliveryCoords,
   handleDelete,
   handleAccept,
 }) {
@@ -126,7 +127,7 @@ export default function Order({
         </div>
         <div className="w-full mx-auto col-span-2">
           {location ? (
-            <MapAccordion location={location} />
+            <MapAccordion latitude={location.latitude} longitude={location.longitude}/>
           ) : (
             <img src={PlaceholderImg} height="300" alt="Placeholder" />
           )}
@@ -170,6 +171,7 @@ export default function Order({
               </div>
             )}
           </div>
+          <MapAccordion latitude={deliveryCoords.latitude} longitude={deliveryCoords.longitude} Title="Delivered Location" />
           <button
             className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center my-2 dark:bg-red-600 dark:hover:bg-red-700 dark:red:ring-blue-800"
             onClick={deleteOrder}
