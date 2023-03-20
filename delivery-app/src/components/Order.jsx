@@ -78,6 +78,7 @@ export default function Order({
 
   let actionButton;
   let statusIcon;
+  let statusStyle;
   if (status === "Awaiting Acceptance") {
     actionButton = (
       <button
@@ -89,23 +90,35 @@ export default function Order({
       </button>
     );
     statusIcon = <TbClock size={28}/>;
+    statusStyle = {
+      backgroundColor: '#FF6161'
+    }
   } else if (status === "Active") {
     actionButton = (
       <Camera ref={cameraRef} onCapture={handleCapture} disabled={delivered} />
     );
     statusIcon = <AiFillCar size={28}/>
+    statusStyle = {
+      backgroundColor: '#66CCCC'
+    }
   }
   else{
     statusIcon = <FaRegCheckSquare size={28}/>
+    statusStyle = {
+      backgroundColor: '#27AE60'
+    }
+
   }
 
   return (
-    <div className="rounded-xl shadow-lg bg-slate-200 max-w-[500px] mx-auto p-4">
+    <div className="rounded-xl shadow-lg bg-slate-200 h-full min-w-full mx-auto">
+    <div className="p-2" style={statusStyle}>
       <div className="flex justify-center gap-2 md:justify-between">
         {statusIcon}
         <span className="font-bold">{status}</span>
       </div>
-      <div className="grid grid-cols-2 items-center justify-items-center gap-4">
+    </div>
+      <div className="grid grid-cols-2 items-center justify-items-center gap-4 px-4">
         <BsFillPersonFill size={50} />
         <div>
           <p className="font-bold">{customerName}</p>

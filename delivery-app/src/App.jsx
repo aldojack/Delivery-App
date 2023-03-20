@@ -115,11 +115,13 @@ function App() {
       <MapContainer />
       <div className="w-full">
         <AddOrder handleAdd={addOrder} />
-        <div className="max-w-[1240px] md:grid md:grid-cols-3 md:gap-2 w-full h-full mx-auto p-4 space-y-4">
+        <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">
           <div className="max-w-[350px] mx-auto flex justify-center flex-1 basis-3/6 space-x-2 md:col-span-3">
             {filterList}
           </div>
+          <div className="space-y-4 md:grid md:grid-cols-3-auto md:grid-template-auto md:gap-4 md:space-y-0 gap-y-2 md:justify-items-center">
           {allOrderElements}
+          </div>
           
         </div>
       </div>
