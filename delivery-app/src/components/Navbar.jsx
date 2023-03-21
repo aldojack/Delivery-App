@@ -13,14 +13,14 @@ export default function Navbar() {
         <img src={LogoTrans} alt="" width="170" height="50" />
         <nav>
           <ul className="hidden md:flex">
-            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300">
+            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300 cursor-pointer">
               Home
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300">
-              Active
+            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300 cursor-not-allowed">
+              Account
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300">
-              Completed
+            <li className="ml-10 text-sm uppercase hover:border-b hover:text-[#FF7F50] ease-in duration-300 cursor-not-allowed">
+              Log Off
             </li>
           </ul>
           <div onClick={handleNav} className="md:hidden cursor-pointer">
@@ -60,15 +60,15 @@ export default function Navbar() {
               </li>
               <li
                 onClick={() => setNav(false)}
-                className="py-4 text-sm hover:text-[#FF7F50] ease-in duration-300 cursor-pointer"
+                className="py-4 text-sm hover:text-[#FF7F50] ease-in duration-300 cursor-not-allowed"
               >
-                Active
+                Account
               </li>
               <li
                 onClick={() => setNav(false)}
-                className="py-4 text-sm hover:text-[#FF7F50] ease-in duration-300 cursor-pointer"
+                className="py-4 text-sm hover:text-[#FF7F50] ease-in duration-300 cursor-not-allowed"
               >
-                Completed
+                Log Off
               </li>
             </ul>
           </nav>
