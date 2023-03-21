@@ -125,19 +125,11 @@ export default function Order({
           <p className="font-bold">{customerName}</p>
           <p>{address}</p>
         </div>
-        <div className="w-full mx-auto col-span-2">
-          {location ? (
+        <div className="w-full mx-auto col-span-2 space-y-2">
+          {status === "Completed" ? (
+            <>
             <MapAccordion latitude={location.latitude} longitude={location.longitude}/>
-          ) : (
-            <img src={PlaceholderImg} height="300" alt="Placeholder" />
-          )}
-        </div>
-        <div></div>
-      </div>
-      <div className="grid justify-items-center">{actionButton}</div>
-      {status === "Completed" && (
-        <div>
-          <div className="bg-white rounded-lg shadow-md">
+            <div className="bg-white rounded-lg shadow-md">
             <button
               className="flex justify-between items-center w-full p-4"
               onClick={() => setIsOpen(!isOpen)}
@@ -178,8 +170,17 @@ export default function Order({
           >
             Remove Order
           </button>
+          <div className="grid justify-items-center">{actionButton}</div>
+
+            </>
+          ) : (
+            <>
+            <MapAccordion latitude={location.latitude} longitude={location.longitude}/>
+            <div className="grid justify-items-center">{actionButton}</div>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
