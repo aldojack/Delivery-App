@@ -21,7 +21,6 @@ export default function LandingPage({ onAccept }) {
             By clicking "Allow", you will get the most optimal performance
             Policy.
           </p>
-          {/* <button onClick={handleLocationPermission}>Allow</button> */}
           <div className="flex justify-center">
           <LocationButton onAccept={onAccept}/>
           </div>

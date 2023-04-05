@@ -48,18 +48,6 @@ function App() {
     localStorage.setItem("orders", JSON.stringify(orders));
   }, [orders]);
 
-  function toggleDelivered(orderNumber, deliverInfo) {
- 
-    setOrders((prevOrders) => {
-      return prevOrders.map((order) => {
-        if (orderNumber === order.orderNumber) {
-          return { ...order, delivered: !order.delivered, ...deliverInfo };
-        }
-        return order;
-      });
-    });
-  }
-
   function addOrder(newOrder) {
     setOrders((prevOrders) => [...prevOrders, newOrder]);
   }
