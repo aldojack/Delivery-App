@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import AddOrder from "./components/AddOrder";
 import FilterButton from "./components/FilterButton";
-import MapContainer from "./components/MapContainer";
+// import MapContainer from "./components/MapContainer";
 import Navbar from "./components/Navbar";
+import OfflineMap from "./components/OfflineMap";
 import Order from "./components/Order";
 import ordersData from "./data/orders";
 import LandingPage from "./pages/LandingPage";
@@ -100,7 +101,8 @@ function App() {
     {isLocationAllowed &&  (
       <>
       <Navbar />
-      <MapContainer />
+      {/* <MapContainer /> */}
+      <OfflineMap/>
       <div className="w-full">
         <AddOrder handleAdd={addOrder} />
         <div className="max-w-[1240px] w-full h-full mx-auto p-4 space-y-4">

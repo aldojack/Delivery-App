@@ -8,7 +8,7 @@ export default function Navbar() {
       setNav(!nav);
     }
   return (
-    <div className=" bg-slate-100 fixed top-0 w-full h-24 shadow-xl z-[100] pt=4">
+    <div className=" bg-slate-100 fixed top-0 w-full h-24 shadow-xl z-[100] pt-4">
       <div className="flex justify-between items-center w-full h-full px-4 2xl:px-16">
         <img src={LogoTrans} alt="" width="170" height="50" />
         <nav>
